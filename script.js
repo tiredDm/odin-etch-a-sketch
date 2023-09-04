@@ -6,8 +6,13 @@ for(let i = 0; i < size; i++){
     for(let j = 0; j < size; j++){
         let divChild = document.createElement('div');
         divChild.classList.add('cell');
+        divChild.addEventListener('mouseover', () => {
+            divChild.style.backgroundColor = "black";
+        });
         div.appendChild(divChild)
     }
     div.classList.add('col');
     container.appendChild(div);
 }
+
+//hover Event listener..    
