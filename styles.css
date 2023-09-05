@@ -1,16 +1,16 @@
 .container{
-    height: 50vh;
-    width: auto;
+    height: 480px;
+    width: 480px;
     display: flex;
 }
 
 .cell{
     border: 1px solid black;
-    width: 20px;
-    height: 20px;
+    flex-grow: 1;
 }
 
 .col{
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
