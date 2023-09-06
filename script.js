@@ -2,7 +2,8 @@ const container = document.querySelector('.container');
 //create the 16 x 16 grid of divs.. make 16 column divs, with 16 divs inside them that have flex direction of vertical..
 // doing this incase we want to change it for later.. // 1 -> 100
 createGrid(16);
-
+let Colour = 'black';
+let randomMode = false;
 
 // Pixel density button...
 const densityButton = document.querySelector('.density-button');
@@ -16,6 +17,17 @@ densityButton.addEventListener('click', () => {
         changePixelDensity(input);
     }
     
+});
+
+//Random Color button...
+const randomColorButton = document.querySelector('.randomize');
+randomColorButton.addEventListener('click', () => {
+    if(randomMode) {
+        randomMode = false;
+        Colour = 'black';
+    } else {
+        randomMode = true;
+    }
 });
 
 function changePixelDensity(pixelDensity){
@@ -32,7 +44,8 @@ function createGrid(size){
             let divChild = document.createElement('div');
             divChild.classList.add('cell');
             divChild.addEventListener('mouseover', () => {
-                divChild.style.backgroundColor = "black";
+                if(randomMode){randomColour();}
+                divChild.style.backgroundColor = Colour;
             });
             div.appendChild(divChild)
         }
@@ -46,4 +59,11 @@ function removeGrid(){
     for(let i = 0; i < size; i++){
         container.removeChild(container.firstChild);
     }
+}
+
+
+
+function randomColour(){
+    Colour = '#' + Math.floor(Math.random()*16777215).toString(16); //found this online but i'm pretty sure it's just a number in hex
+    //console.log(Colour);
 }
