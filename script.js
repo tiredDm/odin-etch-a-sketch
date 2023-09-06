@@ -4,6 +4,7 @@ const container = document.querySelector('.container');
 createGrid(16);
 let Colour = 'black';
 let randomMode = false;
+let opacityMode = false;
 
 // Pixel density button...
 const densityButton = document.querySelector('.density-button');
@@ -30,6 +31,15 @@ randomColorButton.addEventListener('click', () => {
     }
 });
 
+const opacityButton = document.querySelector('.opacity');
+opacityButton.addEventListener('click', () => {
+    if(opacityMode) {
+        opacityMode = false;
+    } else {
+        opacityMode = true;
+    }
+});
+
 function changePixelDensity(pixelDensity){
     console.log(pixelDensity)
     //Destroy all divs within "container.." & create the whole thing again..
@@ -45,6 +55,7 @@ function createGrid(size){
             divChild.classList.add('cell');
             divChild.addEventListener('mouseover', () => {
                 if(randomMode){randomColour();}
+                else if (opacityMode) {opacityColour(divChild);}
                 divChild.style.backgroundColor = Colour;
             });
             div.appendChild(divChild)
@@ -61,9 +72,18 @@ function removeGrid(){
     }
 }
 
-
-
 function randomColour(){
     Colour = '#' + Math.floor(Math.random()*16777215).toString(16); //found this online but i'm pretty sure it's just a number in hex
     //console.log(Colour);
+}
+
+function opacityColour(divChild){
+    //console.log(divChild.style.opacity);
+    if(divChild.style.opacity == ''){
+        divChild.style.opacity = .1;
+    } else {
+        divChild.style.opacity =  (Number(divChild.style.opacity) + .1);
+        
+    }
+        //Colour = 'rgba(0,0,0,' + .2 + ')';
 }
