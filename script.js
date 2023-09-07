@@ -5,6 +5,10 @@ createGrid(16);
 let Colour = 'black';
 let randomMode = false;
 let opacityMode = false;
+let size = 16;
+
+//Mode identifier
+const mode = document.querySelector('.mode');
 
 // Pixel density button...
 const densityButton = document.querySelector('.density-button');
@@ -20,14 +24,22 @@ densityButton.addEventListener('click', () => {
     
 });
 
+const clearCanvasButton = document.querySelector('.clear');
+clearCanvasButton.addEventListener('click', () => {
+    changePixelDensity(size);
+});
+
 //Random Color button...
 const randomColorButton = document.querySelector('.randomize');
 randomColorButton.addEventListener('click', () => {
     if(randomMode) {
         randomMode = false;
         Colour = 'black';
+        mode.innerHTML = 'Normal Mode';
     } else {
         randomMode = true;
+        opacityMode = false;
+        mode.innerHTML = 'Random Mode';
     }
 });
 
@@ -35,8 +47,12 @@ const opacityButton = document.querySelector('.opacity');
 opacityButton.addEventListener('click', () => {
     if(opacityMode) {
         opacityMode = false;
+        mode.innerHTML = 'Normal Mode';
     } else {
         opacityMode = true;
+        randomMode = false;
+        Colour = 'black';
+        mode.innerHTML = 'Opacity Mode';
     }
 });
 
@@ -45,6 +61,7 @@ function changePixelDensity(pixelDensity){
     //Destroy all divs within "container.." & create the whole thing again..
     removeGrid();
     createGrid(pixelDensity);
+    size = pixelDensity;
 }
 
 function createGrid(size){
